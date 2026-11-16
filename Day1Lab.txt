@@ -1,1 +1,17 @@
+Lab1 - Create a folder Demo1 (c:\gocode)
+        create Lab1.go 
+package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!!!")
+}
+      c:\gocode\Demo1>go build Lab1.go  (observe the executable file created, then invoke Lab1.exe)
+      c:\gocode\Demo1>go run Lab1.go  (it will execute the file directly)
 
+Compilation/Runtime errors 
+     semicolon optional 
+     unexpected semicolon or newline before {
+  	 function main is undeclared in the main package
+  	 Excutable -> main package and main function 
+  	 package fmtzz is not in std (C:\Program Files\Go\src\fmtzz)
+  	
