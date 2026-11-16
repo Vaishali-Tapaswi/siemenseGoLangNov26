@@ -1,3 +1,33 @@
+Lab5Asgn - Use Os.Args to print all the command line arguments and print sum of string length of all the arguments
+			str := "3000" , convert str to number and 10 and show 
+				-> strconv https://pkg.go.dev/strconv
+
+Lab5 - use of packages and implement if, for 
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	//func Hostname() (name string, err error)
+	name, err := os.Hostname()
+	if err != nil {
+		fmt.Println("Error occurred:", err)
+	} else {
+		fmt.Println("Hostname is:", name)
+	}
+	fmt.Println(os.Args)
+	fmt.Println("Number of arguments:", len(os.Args))
+	fmt.Println("length of second argument:", len(os.Args[0]))
+}
+
+for i := 0; i < 10; i++
+for sum < 1000 {
+for {
+
+
 Lab4 - named returns 
 
 func calc(a , b int) (sum, sub int) {
