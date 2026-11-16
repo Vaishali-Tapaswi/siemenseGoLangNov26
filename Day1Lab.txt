@@ -1,3 +1,50 @@
+Lab10 - function as return (closures)
+package main
+
+import "fmt"
+
+func process(base int) func(int) int{
+	fmt.Println("in process function with base = ", base)
+	return func(a int) int {
+		fmt.Println("in return function")
+		base = a+base
+		return base
+	}
+}	
+
+func main() {
+	fp := process(5)
+	fmt.Println("Result of fp is:", fp(10))
+	fmt.Println("Result of fp is:", fp(10))
+	fmt.Println("Result of fp is:", fp(10))
+}
+
+
+Lab9 - functions as input (Demo2\Lab1.go)
+package main
+
+import "fmt"
+
+func process(a, b int, operation func(int,int) int) {
+	fmt.Println("in process function with operation", operation)
+	fmt.Println("Result of operation is:", operation(a,b))
+	}	
+
+func main() {
+	process(10,5, add)
+	process(10,5, sub)
+}
+
+func add(a , b int) int {
+	fmt.Println("in add function")
+	return a+b
+}
+func sub(a , b int) int {
+	fmt.Println("in sub function")
+	return a-b
+}
+
+
 Lab8Asgn - 
 	Accept a number from user and print Fibonacci series till that number
 	Accept 5 strings from user and sort and print the same
