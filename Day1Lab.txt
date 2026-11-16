@@ -1,3 +1,31 @@
+Lab11 - defer 
+package main
+import "fmt"
+
+func main(){ 
+	i := 10
+	defer fmt.Println("Hello", i)
+	i = 40000
+	print1()
+	defer fmt.Println("defer statement after print1")
+	fmt.Println("World")
+	print2()
+}
+func print1(){
+	defer fmt.Println("defer statement in print function")
+	fmt.Println("start of print function")
+	nu:= 0
+	nu = 10/nu
+	fmt.Println("end of print function", nu)
+}
+func print2(){
+	fmt.Println("start of print2 function")
+	for i:=0; i<5; i++{
+		defer fmt.Println("defer in print2", i)
+	}	
+}
+
+
 Lab10 - function as return (closures)
 package main
 
