@@ -1,3 +1,59 @@
+Lab4 - Write code to swap two strings 
+Lab3 - functions (Lab3.go) 
+package main
+
+import "fmt"
+func helloworld(){
+	fmt.Println("in Hello World function")
+}
+func add(a , b int) int {
+	fmt.Println("in add function")
+	return a+b
+}
+func sub(a , b int) int {
+	fmt.Println("in sub function")
+	return a-b
+}
+func calc(a , b int) (int, int) {
+	fmt.Println("in calc function")
+	return a+b, a-b
+}
+func main() {
+	helloworld()
+	result := add(5, 10)
+	fmt.Println("Result of addition is:", result)
+	result = sub(10, 5)
+	fmt.Println("Result of subtraction is:", result)
+	addResult, subResult := calc(10, 5)
+	fmt.Println("Returned, sum =  ", addResult, "sub = ", subResult)
+}
+
+
+
+Lab2 - variable 
+        https://go.dev/tour/basics/11 
+        -> multiple variables for :=, any one new 
+        -> declared and not used: name1
+        -> "fmt" imported and not used
+
+func main() {
+	var i int = 10 
+	fmt.Println("Value of i is:", i)	
+	var s string = "Hello, World!!!"
+	fmt.Println("Value of s is:", s)
+
+	j := 20 
+	st1 := "Hi"
+	fmt.Println("Value of j is:", j)
+	fmt.Println("Value of st1 is:", st1)
+	
+	age, name := 30, "John"
+	fmt.Println("Value of age is:", age)
+	fmt.Println("Value of name is:", name)
+	
+	
+}
+
 Lab1 - Create a folder Demo1 (c:\gocode)
         create Lab1.go 
 package main
