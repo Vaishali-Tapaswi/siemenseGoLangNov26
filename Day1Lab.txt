@@ -1,3 +1,74 @@
+Lab8Asgn - 
+	Accept a number from user and print Fibonacci series till that number
+	Accept 5 strings from user and sort and print the same
+
+Lab8 - scan 
+package main
+import "fmt"
+func main(){
+	fmt.Print("Enter Your Name and Age : ")
+	var name string 
+	age := 4
+	//func Scanln(a ...any) (n int, err error)
+	cnt, err := fmt.Scanln(&name, &age)
+	
+		fmt.Println("Error reading input:", err , "Count of scanned items:", cnt)
+	fmt.Println("Your Name is :", name, "and Your Age is :", age)	
+}
+
+Lab7 - scope of variables 
+package main
+ 
+import "fmt"
+ 
+var str  ="Hello outside function "
+
+func main() {
+	const str1  ="Hello outside function const"	
+	
+	fmt.Println("const " ,str1)
+	fmt.Println(str)
+	str = "Hello in main after redeclaration"
+	fmt.Println(str)
+	str :="Hello in main "
+    fmt.Println(str)
+	if str != "" {
+		fmt.Println("in if before redeclaration:",str)
+		str := "hello in if "
+		fmt.Println("in if:",str)
+		str = "hello in if after redeclaration"
+		fmt.Println("in if:",str)
+	}
+	fmt.Println("in main:",str)
+}
+
+
+Lab6 - create multiple files 
+Lab6.go 
+	package main
+	import "fmt"
+	func main() {
+		helloworld()
+		addResult, subResult := calc(10, 5)
+		fmt.Println("Returned, sum =  ", addResult, "sub = ", subResult)
+	}
+Lab6Helper.go 
+	package main
+	
+	import "fmt"
+	func helloworld(){
+		fmt.Println("in Hello World function")
+	}
+	
+	func calc(a , b int) (sum, sub int) {
+		fmt.Println("in calc function")
+		sum, sub = a+b, a-b
+		return 
+	}
+cmd>go run Lab6.go -> give error 
+cmd>go run Lab6.go Lab6Helper.go 
+
+
 Lab5Asgn - Use Os.Args to print all the command line arguments and print sum of string length of all the arguments
 			str := "3000" , convert str to number and 10 and show 
 				-> strconv https://pkg.go.dev/strconv
