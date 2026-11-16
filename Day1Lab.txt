@@ -1,4 +1,4 @@
-Lab4 - Write code to swap two strings 
+Lab4 - Write function to swap two strings 
 Lab3 - functions (Lab3.go) 
 package main
 
