@@ -1,3 +1,38 @@
+Lab13 - write a function getEmp(empno) return name 
+		1. Write method with two options
+			1. getemp should return emp and err 
+			2. getemp should panic if employee not found -> please add recover in main method to display error message
+-----------------> if empno is odd -> treat as not found 
+
+Lab12 - panic and recover 
+package main
+import "fmt"
+import "strconv"
+func main(){ 
+	fmt.Println("start of main ")
+	fmt.Println("Divide result is:", divide("a0", "10"))
+	fmt.Println("end  of main ")
+}
+func divide(s1, s2 string)  {
+	defer func() {
+		fmt.Println("in defer function")
+		r := recover()
+		fmt.Println("recovered from panic:", r)
+	}()
+		
+	fmt.Println("in divide function with s1=", s1, "s2=", s2)
+	n1, err := strconv.Atoi(s1)
+	fmt.Println("n1=", n1, "err=", err)
+	if err != nil {
+		panic("Error in converting s1 to int")
+	}
+	n2,_ := strconv.Atoi(s2)
+	fmt.Println("n2=", n2)
+	return n1/n2
+}
+
+
+
 Lab11 - defer 
 package main
 import "fmt"
