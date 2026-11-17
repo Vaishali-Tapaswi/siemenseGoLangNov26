@@ -1,3 +1,29 @@
+Lab7 - interfaces 
+package main
+
+import "fmt"
+
+type Employee struct {
+    id     int
+    name   string
+    salary float64
+}
+type Display interface {
+	func1()
+}
+
+func (e Employee) func1(){
+	fmt.Println("in func1 with employee as receiver", e)
+}
+func main(){
+	e1 := Employee{id: 1, name: "John", salary: 50000}
+	var d Display  
+	d = e1	
+	d.func1()
+	e1.func1()
+
+}
+
 Lab6 - create struct - emp (empno, ename, salary -> int, string, float 
 				method on emp -> incrsalary (accept percent) 
 							  -> print - just display details 
