@@ -1,3 +1,35 @@
+Lab6 - create struct - emp (empno, ename, salary -> int, string, float 
+				method on emp -> incrsalary (accept percent) 
+							  -> print - just display details 
+	   create struct empMgr ( slice of emp) 
+			method -> add(Emp) -> add emp to slice 
+					  print () -> display all employees 
+
+
+Lab5 - methods 
+package main
+
+import "fmt"
+
+type Point struct {
+	X int
+	Y int
+}
+func (p Point) print() {
+	fmt.Println("Details - p.x = ", p.X, "p.y = ", p.Y)
+}
+func (p *Point) shift(dx, dy int) {
+	p.X, p.Y = p.X+dx, p.Y+dy
+	fmt.Println("in Shift - p.x = ", p.X, "p.y = ", p.Y)
+}
+func main() {
+	p1 := Point{10, 20}
+	fmt.Println(p1)
+	p1.print()
+	p1.shift(2,3)
+	fmt.Println("after shift - p.x = ", p1.X, "p.y = ", p1.Y)
+}
+
 Lab4 - use of range and maps 
 var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
 func main() {
