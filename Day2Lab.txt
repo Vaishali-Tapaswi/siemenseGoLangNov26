@@ -1,0 +1,42 @@
+Lab1 - Demo3\Lab1.go - structs and pointers
+package main
+
+import "fmt"
+
+type Point struct {
+	X int
+	Y int
+}
+
+func shiftValue(p Point) {
+	fmt.Println("--------in shift function with ", p)
+	p.X += 10
+	p.Y += 20
+	fmt.Println("--------end of shift function with ", p)
+}
+
+func shiftRef(p *Point) {
+	fmt.Println("--------in shift function with ", p)
+	p.X += 10
+	p.Y += 20
+	fmt.Println("--------end of shift function with ", p)
+}
+
+func main() {
+	p1 := Point{10, 20}
+	fmt.Println(p1)
+	p1 = Point{0, 20}
+	p1.X = 11
+	fmt.Println(p1)
+	p1 = Point{Y: 10, X: 20}
+	fmt.Println(p1)
+	p1 = Point{}
+	fmt.Println("before shiftValue call ", p1)
+	shiftValue(p1)
+	
+	fmt.Println("after shiftValue	 call ", p1)
+	fmt.Println("before shiftRef call ", p1)
+	shiftRef(&p1)
+	fmt.Println("after shiftRef call ", p1)
+}
+
