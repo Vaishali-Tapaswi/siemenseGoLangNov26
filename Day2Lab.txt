@@ -1,3 +1,8 @@
+Lab8 - create log file using 
+		-> https://pkg.go.dev/log
+		 	func SetOutput(w io.Writer)
+	    -> check best use of defer 
+	All types of log messages 
 Lab7 - interfaces 
 package main
 
