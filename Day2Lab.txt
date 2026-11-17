@@ -1,3 +1,89 @@
+Lab13 - Lab6 - controlling go routines
+package main
+
+import (
+"fmt"
+"time"
+"math/rand"
+)
+var finaldest string ="" 
+var flag = true
+func main(){
+	
+	go print("Goa")
+	go print("Kashmir")
+	go print("Kanyakumari")
+	time.Sleep(2000 * time.Millisecond)
+	fmt.Println("The Final Choice is ", finaldest)
+}
+func print(str string){
+	for i:=0;i<10 && flag;i++{
+		fmt.Println(str," ", i)
+		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+	}
+	if flag==true {
+		fmt.Println("The Final Choice is ", str)
+		finaldest = str
+		flag = false
+	}
+}
+
+
+Lab12- Lab5 - timeslice 
+package main
+
+import (
+"fmt"
+"time"
+)
+
+func main(){
+	
+	go print(".")
+	go print("-")
+	go print("x")
+	time.Sleep(2000 * time.Millisecond)
+}
+func print(str string){
+	for i:=0;i<1000;i++{
+		fmt.Print(str)
+	}
+}
+
+
+Lab11 - Lab4(Demo4) - simple go routines 
+package main
+
+import (
+"fmt"
+"time"
+)
+
+func main(){
+	go hello()
+	go world()
+	// options 1 -	wait for some input 
+	/*
+	fmt.Println("enter a number to continue")
+	i := 0
+	fmt.Scanln(&i)
+	*/
+	// options 2
+	//sleep for some time 
+	time.Sleep(100 * time.Millisecond)
+}
+func hello(){
+	for i:=0;i<5;i++{
+		fmt.Println("hello")
+	}
+}
+func world(){
+	for i:=0;i<5;i++{
+		fmt.Println("world")
+	}
+}
+
+
 Lab10 - lab3.go for json marshal/unmarshal
 package main
 
