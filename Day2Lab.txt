@@ -1,4 +1,20 @@
-Lab2 - slice -> modify length and cap to check allocation impact
+Lab4 - use of range and maps 
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+func main() {
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}}
+---- 
+var m map[string]int;
+m = make(map[string]int)
+m["a"]=100
+m["b"]=200
+m["a"]=300
+fmt.Println(m["a"]);
+	-> test delete, retrieve methods (delete(m, key), elem, ok = m[key])
+
+
+Lab3 - slice -> modify length and cap to check allocation impact
 package main
 
 import ("fmt")
@@ -23,7 +39,30 @@ func main(){
     slice1 = append(slice1, 11)
 	fmt.Println("length of slice1 is ", len(slice1), "capacity of slice1 is ", cap(slice1))
 }
+Lab2 - slice from array 
+package main
 
+import ("fmt"
+	
+)
+
+func main(){
+	// Array
+	var a [2]string
+	primes := [6]int{20, 31, 5, 77, 11, 13}
+	a[0] = "Hello"
+	a[1] = "World"
+	fmt.Println(a)
+	fmt.Println(primes)
+	// Slice 
+	//fmt.Println(sort.Ints(primes))
+	sl1 := primes[0:3]
+	fmt.Println("Slice from primes[0:3]:", sl1)
+	sl1[0] = 100
+	fmt.Println("Slice after changing sl1[0] to 100:", sl1)
+	fmt.Println("Primes after changing sl1[0] to 100:", primes)
+	fmt.Println("sl2 primes[3,5]:", primes[3:5])
+}
 Lab1 - Demo3\Lab1.go - structs and pointers
 package main
 
