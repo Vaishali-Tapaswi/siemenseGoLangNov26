@@ -1,3 +1,35 @@
+Lab10 - lab3.go for json marshal/unmarshal
+package main
+
+import (
+	"fmt"
+	"encoding/json"
+)
+type Employee struct {
+	Empno   int     `json:"empno"`
+	Empname string  `json:"empname"`
+	Sal  float64 `json:"salary"`
+}
+
+func main() {
+	employee := Employee{
+		Empno:   1,
+		Empname: "Simple ",
+		Sal: 20020.20,
+	}
+	barr, err:=json.Marshal(employee)
+	if err != nil {
+		fmt.Println("Error occurred:", err)
+	}		
+	fmt.Println("JSON representation of employee is:", string(barr))
+    // read the a1.json file
+	// convert to bytearray and invoke unmarshal
+	// fmt(obj.Empno, obj.Empname or print method )
+
+}
+
+}
+
 Lab9 - create a folder (demo4\lab2-properties)
 	lab1.go 
 package main
