@@ -1,3 +1,29 @@
+Lab2 - slice -> modify length and cap to check allocation impact
+package main
+
+import ("fmt")
+
+func main(){
+	slice1:= make([]int, 5,10)
+	fmt.Println("slice1 is ", slice1)
+	slice1[0]=10
+	slice1[1]=40
+	slice1[2]=60
+	slice1[3]=20
+	slice1[4]=80
+	fmt.Println("slice1 after initialization:", slice1)
+	fmt.Println("length of slice1 is ", len(slice1), "capacity of slice1 is ", cap(slice1))
+	slice1 = append(slice1, 11)
+	fmt.Println("length of slice1 is ", len(slice1), "capacity of slice1 is ", cap(slice1))
+	slice1 = append(slice1, 11)
+	slice1 = append(slice1, 11)
+	slice1 = append(slice1, 11)
+	slice1 = append(slice1, 11)
+	fmt.Println("length of slice1 is ", len(slice1), "capacity of slice1 is ", cap(slice1))
+    slice1 = append(slice1, 11)
+	fmt.Println("length of slice1 is ", len(slice1), "capacity of slice1 is ", cap(slice1))
+}
+
 Lab1 - Demo3\Lab1.go - structs and pointers
 package main
 
