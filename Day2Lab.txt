@@ -1,3 +1,24 @@
+Lab9 - create a folder (demo4\lab2-properties)
+	lab1.go 
+package main
+import (
+	"fmt"
+	"github.com/magiconair/properties"
+)
+func main() {
+	p := properties.MustLoadFile("my.properties", properties.UTF8)
+	port := p.GetInt("port", 80)
+	fmt.Println(port)
+	fmt.Println(p.MustGetString("hostname"))
+	
+}
+
+cmd\lab2-properties>go run Lab1.go 
+	observe error
+	go mod init myprop -> confirm a go.mod file is created
+	go mod tidy -> read all go files, check imports, modify .mod files, download imports(in gopath), create go.sum
+	go run . (only single file with main.main
+
 Lab8 - create log file using (Demo4\Lab1.go)
 		-> https://pkg.go.dev/log
 		 	func SetOutput(w io.Writer)
