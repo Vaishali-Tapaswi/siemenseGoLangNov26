@@ -1,3 +1,43 @@
+Lab15 - 
+	Write -> Bank -> Balance =0
+	write 2 functions -> deposit, withdraw -> in for loop of 100 -> increment by 1, decrement by 1 
+	from main method -> invoke deposit and withdraw 5 times -> show balance
+Lab14 - Lab7  - channels 
+package main
+
+import (
+"fmt"
+"time"
+
+)
+var finaldest string ="" 
+var flag = true
+func main(){
+	
+	ch := make(chan string, 1)
+	go Writer(ch)
+	go Reader(ch)
+	time.Sleep(10000 * time.Millisecond)
+}
+func Writer(channel chan string ){
+	fmt.Println("Writer started")
+	fmt.Println("sending first string")
+	channel <- "firststring"
+	fmt.Println("sent first, now sending second")
+	channel <- "secondstring"
+	fmt.Println("sent second, now sending third")
+	channel <- "thirdstring"
+	fmt.Println("sent third")
+	close(channel)
+
+}
+func Reader(channel chan string ){
+	fmt.Println("Reader started")
+	for msg := range channel {
+	 fmt.Println("in reader " , msg)
+	}
+}
+
 Lab13 - Lab6 - controlling go routines
 package main
 
