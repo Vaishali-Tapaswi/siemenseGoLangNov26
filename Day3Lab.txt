@@ -1,3 +1,32 @@
+Lab2 - waitgroup (Lab9.go)
+package main
+
+import (
+"fmt"
+"sync"
+)
+var wg sync.WaitGroup
+func main(){
+	
+	wg.Go(hello)
+	wg.Go(world)
+	fmt.Println("just before wait")
+	wg.Wait()
+	fmt.Println("after completing the work... ")
+}
+
+func hello(){
+	for i:=0;i<5;i++{
+		fmt.Println("hello")
+	}
+}
+func world(){
+	for i:=0;i<5;i++{
+		fmt.Println("world")
+	}
+}
+
+
 Lab1 - Demo4\Lab8 - mutex
 package main
 
