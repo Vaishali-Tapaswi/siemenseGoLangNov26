@@ -1,3 +1,33 @@
+Lab3 - create a folder Demo5\Lab1-dbcon
+	create a file Lab1.go 
+package main
+
+import (
+    "database/sql"
+    "log"
+    _ "github.com/lib/pq" // To register the driver.
+	"fmt"
+)
+
+func main() {
+    // Or as URL: postgresql://localhost/pqgo
+    db, err := sql.Open("postgres", "host=localhost dbname=pqgo connect_timeout=5")
+    if err != nil {
+        log.Fatal(err)
+    }
+	defer db.Close()
+ 	err = db.Ping()
+    if err != nil {
+        log.Fatal(err)
+    }
+	fmt.Println("Established connection")
+
+}
+	cmd> create a module, invoke tidy, run 
+   define db.properties - dbhostname(34.26.115.92), dbport(5432), dbname -> magico
+
+
+
 LabAsgn - Check following code using vet and rectify 
 --
 package main
