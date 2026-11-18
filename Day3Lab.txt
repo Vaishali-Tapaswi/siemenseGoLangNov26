@@ -1,3 +1,56 @@
+Lab6 - Lab2.go -
+Modify HandleFunc to accept the request for /Emp 
+	SwitchCase for r.Method -> Get/Post/Put/Delete 
+	Modify get request to return json content (Emp object Marshal)
+    Modify post request to get json object (UnMarshal)
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"log"
+)
+
+func main(){
+
+http.HandleFunc("/", 
+   func(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World ")
+})
+http.HandleFunc("/page1", 
+   func(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>Page 1 invoked %s </h1> ",r.Method )
+})
+
+fmt.Println("Starting server on 8080")
+log.Fatal(http.ListenAndServe("localhost:8080", nil))
+
+}
+
+
+Lab5 - Create new folder Lab3-http in Demo5 
+	create Lab1.go (Client) 
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"io"
+)
+
+func main(){
+	resp, err := http.Get("https://go.dev/wiki/SQLDrivers")
+	if err != nil {
+		fmt.Println("Get Error " , err)
+	}
+	defer resp.Body.Close()
+	fmt.Println("Status = ", resp.Status, " StatusCode = ", resp.StatusCode)
+	
+	body, err := io.ReadAll(resp.Body)
+	fmt.Println(string(body))
+
+}
+Modify url and just confirm downloaded content
 Lab4Ext - Modify divide methods to return division and error 
 		if the call is "3200","0" -> this should give you dividebyzero error 
 Lab4 Testing - Demo5\Lab2Testing
