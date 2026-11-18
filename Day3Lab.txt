@@ -1,4 +1,6 @@
-Lab4Testing - Demo5\Lab2Testing
+Lab4Ext - Modify divide methods to return division and error 
+		if the call is "3200","0" -> this should give you dividebyzero error 
+Lab4 Testing - Demo5\Lab2Testing
 Create Lab1.go 
 package main
 
@@ -28,7 +30,15 @@ func main() {
 }
 
 Create Lab2.go 
+package main
 
+import "strconv"
+
+func divide(s1, s2 string)  int {
+	n1, _ := strconv.Atoi(s1)
+	n2,_ := strconv.Atoi(s2)
+	return n1/n2
+}
 Create Lab1_test.go 
 package main
 
@@ -39,7 +49,14 @@ func TestAdd(t *testing.T){
         t.Errorf("add(10,20) = %d; want 30", got)
     }
 }
-	
+	cmd>go mod init calc 
+    cmd>go test . 
+	cmd>go test . -v 
+	cmd>go test -v 
+	cmd>go test  -cover
+	cmd>go test  -coverprofile out.txt
+    cmd>go tool cover -html=tmp.txt -o tmp.html
+
 
 Lab3Ex - complete CRUD basics(w/o error handling)
 package main
