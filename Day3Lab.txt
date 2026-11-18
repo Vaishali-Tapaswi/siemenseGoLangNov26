@@ -1,7 +1,7 @@
-														
+Lab3Ex - complete CRUD basics(w/o error handling)
 package main
  
-import   
+import (
     "database/sql"
     "fmt"
     "log"
@@ -16,6 +16,56 @@ type Emp struct {
 	Empname string  `json:"empname"`
 	Sal  float64 `json:"salary"`
 }
+
+func getEmployeeById(db *sql.DB, empno int) {
+    var e Emp
+    err := db.QueryRow("select * from emptable where empno=$1", empno).Scan(&e.Empno, &e.Empname, &e.Sal)
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Println("Retrieved Employee :", e.Empno, " Employee name :", e.Empname, " Salary :", e.Sal)
+}
+ 
+func Update(db *sql.DB, emp Emp) {
+    result, err := db.Exec("update emptable set salary=$1, ename=$2 where empno=$3", emp.Sal, emp.Empname, emp.Empno)
+    log.Println("result :", result, "error :", err)
+    rowsaff, err := result.RowsAffected()
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    log.Println("rowsaffect  : ", rowsaff)
+}
+ 
+func Delete(db *sql.DB, empno int) {
+    result, err := db.Exec("DELETE FROM emptable WHERE empno = $1", empno)
+    if err != nil {
+        fmt.Println("delete failed:", err)
+        return
+    }
+ 
+    rowsAffected, err := result.RowsAffected()
+    if err != nil {
+        fmt.Println("could not get deleted row count:", err)
+        return
+    }
+    fmt.Println("rows deleted:", rowsAffected)
+}
+func Select(db *sql.DB) []Emp{
+    rows, err := db.Query("Select empno, ename,salary from emptable")
+	if err != nil {
+		fmt.Println("select error" , err)
+	}
+	defer rows.Close()
+    var emps []Emp
+    for rows.Next() {
+        var emp Emp
+        // check error
+        rows.Scan(&emp.Empno, &emp.Empname, &emp.Sal)
+        emps = append(emps, emp)
+    }
+    return emps
+} 
 
 
 func Insert(db *sql.DB, e1 Emp){
@@ -49,11 +99,14 @@ func main() {
     }
     defer db.Close()
 
-	Insert(db, Emp{5,"five",5550.50})
-	fmt.Println("Established connection")
- 
+	//Insert(db, Emp{5,"five",5550.50})
+	//Delete(db, 5) 
+  //  Update(db, Emp{1, "First", 11111.11})
+    for _, e := range Select(db) {
+        fmt.Println(e)
+    }
 }
-
+ 
 
 Lab3 - create a folder Demo5\Lab1-dbcon
 	create a file Lab1.go 
