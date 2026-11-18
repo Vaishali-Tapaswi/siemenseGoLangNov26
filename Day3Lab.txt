@@ -1,3 +1,46 @@
+Lab4Testing - Demo5\Lab2Testing
+Create Lab1.go 
+package main
+
+import "fmt"
+
+func add(a , b int) int {
+	fmt.Println("in add function")
+	return a+b
+}
+func sub(a , b int) int {
+	fmt.Println("in sub function")
+	return a-b
+}
+func calc(a , b int) (int, int) {
+	fmt.Println("in calc function")
+	return a+b, a-b
+}
+func main() {
+	helloworld()
+	result := add(5, 10)
+	fmt.Println("Result of addition is:", result)
+	result = sub(10, 5)
+	fmt.Println("Result of subtraction is:", result)
+	addResult, subResult := calc(10, 5)
+	fmt.Println("Returned, sum =  ", addResult, "sub = ", subResult)
+	
+}
+
+Create Lab2.go 
+
+Create Lab1_test.go 
+package main
+
+import "testing"
+func TestAdd(t *testing.T){
+	got := add(10,20)
+    if got != 30 {
+        t.Errorf("add(10,20) = %d; want 30", got)
+    }
+}
+	
+
 Lab3Ex - complete CRUD basics(w/o error handling)
 package main
  
