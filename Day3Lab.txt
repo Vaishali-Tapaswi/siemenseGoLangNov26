@@ -1,3 +1,59 @@
+LabAsgn - Check following code using vet and rectify 
+--
+package main
+
+import (
+	"fmt"
+	"time"
+	//"math/rand"
+	"sync"
+)
+
+type Bank struct {
+	mutex sync.Mutex
+	Balance int 
+}
+
+func  deposit(bank Bank) {
+	for i:=0;i<100;i++{
+		// chances of switching go routines become highter
+		bank.mutex.Lock()
+		//defer bank.mutex.Unlock()
+		bal := bank.Balance
+		bal += 1
+		//time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+		bank.Balance = bal	
+		bank.mutex.Unlock()
+	}
+	fmt.Println("In Deposit - " ,  bank.Balance )
+}
+
+
+func  withdraw(bank Bank) {
+	for i:=0;i<100;i++{
+		// chances of switching go routines become highter
+		bank.mutex.Lock()
+		bal := bank.Balance
+		bal -= 1
+		//time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+		bank.Balance = bal	
+		bank.mutex.Unlock()
+	}
+	fmt.Println("In withdraw - " ,  bank.Balance )
+}
+
+func main() {
+	bank := Bank{}
+   
+    for i := 0; i < 5; i++ {
+       go deposit(bank)
+       go withdraw(bank)
+    }
+
+    time.Sleep(2000 * time.Millisecond)
+    fmt.Println("Main - Final balance :", bank.Balance)
+}
+--
 Lab2 - waitgroup (Lab9.go)
 package main
 
