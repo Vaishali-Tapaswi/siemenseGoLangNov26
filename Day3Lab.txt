@@ -1,3 +1,60 @@
+														
+package main
+ 
+import   
+    "database/sql"
+    "fmt"
+    "log"
+
+    "github.com/magiconair/properties"
+
+	_ "github.com/lib/pq" // To register the driver.
+)
+
+type Emp struct {
+	Empno   int     `json:"empno"`
+	Empname string  `json:"empname"`
+	Sal  float64 `json:"salary"`
+}
+
+
+func Insert(db *sql.DB, e1 Emp){
+//func (db *DB) Exec(query string, args ...any) (Result, error)
+	result, err := db.Exec("insert into emptable values ($1, $2, $3)", e1.Empno, e1.Empname, e1.Sal); 	
+	fmt.Println("result :", result, "error :", err)
+	// if err != nil 
+	inserid, err := result.LastInsertId() 
+	fmt.Println("error for insertid " , err)
+	rowsaff , err := result.RowsAffected() 
+	fmt.Println("error for rowsaffect " , err)
+	fmt.Println("rowsaffect  : ", rowsaff, " insertid : ", inserid)
+}
+
+func main() {
+ 
+    p := properties.MustLoadFile("db.properties", properties.UTF8)
+    str :=fmt.Sprintf(
+        "host=%s port=%d dbname=%s user=%s password=%s connect_timeout=10 sslmode=prefer",
+        p.GetString("dbhost", "localhost"),
+        p.GetInt("dbport", 5432),
+        p.GetString("dbname", ""),
+        p.GetString("dbuser", ""),
+        p.GetString("dbpassword", ""),
+    )
+	fmt.Println(str)
+    db, err := sql.Open("postgres", str)
+	fmt.Println("after open ", db, err)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer db.Close()
+
+	Insert(db, Emp{5,"five",5550.50})
+	fmt.Println("Established connection")
+ 
+}
+
+
 Lab3 - create a folder Demo5\Lab1-dbcon
 	create a file Lab1.go 
 package main
