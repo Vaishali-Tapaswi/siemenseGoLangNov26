@@ -1,3 +1,153 @@
+Lab2 - http testing basic example 
+Create a folder Demo7\Lab1-httptest 
+Create emp.go 
+package main
+
+import (
+	"encoding/json"
+	"net/http"
+)
+
+type Employee struct {
+	EmpNo  int     `json:"empno"`
+	EName  string  `json:"ename"`
+	Salary float64 `json:"salary"`
+}
+
+func CreateEmployeeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var emp Employee
+	if err := json.NewDecoder(r.Body).Decode(&emp); err != nil {
+		http.Error(w, "invalid JSON payload", http.StatusBadRequest)
+		return
+	}
+
+	// Basic validation
+	if emp.EmpNo <= 0 || emp.EName == "" || emp.Salary < 0 {
+		http.Error(w, "invalid employee details", http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(emp)
+}
+
+create emp_test.go 
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+type empTestCase struct {
+	Name           string          `json:"name"`
+	Payload        json.RawMessage `json:"payload"`
+	ExpectedStatus int             `json:"expected_status"`
+	ExpectedEmp    Employee        `json:"expected_emp"`
+}
+
+func TestCreateEmployeeHandlerFromJSON(t *testing.T) {
+	// Read the external JSON test file
+	filePath := filepath.Join("empcases.json")
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		t.Fatalf("failed to read test file %s: %v", filePath, err)
+	}
+
+	// Unmarshal test cases into a slice
+	var tests []empTestCase
+	if err := json.Unmarshal(data, &tests); err != nil {
+		t.Fatalf("failed to parse test JSON: %v", err)
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.Name, func(t *testing.T) {
+			// tc.Payload is already raw JSON bytes ready for the request body
+			req := httptest.NewRequest(http.MethodPost, "/employees", bytes.NewReader(tc.Payload))
+			req.Header.Set("Content-Type", "application/json")
+			rr := httptest.NewRecorder()
+
+			// Execute handler
+			CreateEmployeeHandler(rr, req)
+
+			// Verify HTTP status code
+			if rr.Code != tc.ExpectedStatus {
+				t.Fatalf("expected status %d, got %d (body: %s)", tc.ExpectedStatus, rr.Code, rr.Body.String())
+			}
+
+			// Verify JSON response body on 201 Created
+			if tc.ExpectedStatus == http.StatusCreated {
+				var got Employee
+				if err := json.NewDecoder(rr.Body).Decode(&got); err != nil {
+					t.Fatalf("failed to decode response JSON: %v", err)
+				}
+
+				if got != tc.ExpectedEmp {
+					t.Errorf("expected employee %+v, got %+v", tc.ExpectedEmp, got)
+				}
+			}
+		})
+	}
+}
+
+create empcases.json 
+[
+  {
+    "name": "Valid Employee POST",
+    "payload": {
+      "empno": 101,
+      "ename": "Aarav Sharma",
+      "salary": 75000.50
+    },
+    "expected_status": 201,
+    "expected_emp": {
+      "empno": 101,
+      "ename": "Aarav Sharma",
+      "salary": 75000.50
+    }
+  },
+  {
+    "name": "Missing Employee Name",
+    "payload": {
+      "empno": 102,
+      "ename": "",
+      "salary": 50000
+    },
+    "expected_status": 400
+  },
+  {
+    "name": "Negative Salary",
+    "payload": {
+      "empno": 103,
+      "ename": "Priya Patel",
+      "salary": -1000
+    },
+    "expected_status": 400
+  },
+  {
+    "name": "Wrong Field Type",
+    "payload": {
+      "empno": "not-a-number",
+      "ename": "Vikram Rao",
+      "salary": 60000
+    },
+    "expected_status": 400
+  }
+]
+
+cmd>
+
 Lab1 - create folder demo5\calclib and demo5\invokelib
 in calclib - create two files a1.go, a2.go 
 a1.go 
