@@ -1,5 +1,5 @@
-Lab4 - add mocking example in final project 
-
+Lab4 - add mocking example in final project (check from classdemos\final)
+go test ./... -v
 Lab3 - modify emp.go to include delete method (200 for successful deletion) and 404 if record not found.
 	   modify emp_test.go to include both test cases 
 
