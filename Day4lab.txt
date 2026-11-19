@@ -1,0 +1,38 @@
+Lab1 - create folder demo5\calclib and demo5\invokelib
+in calclib - create two files a1.go, a2.go 
+a1.go 
+package calc
+
+import (
+	"fmt"
+)
+
+func Add(a, b int) int {
+	fmt.Println("in calc package - in add function")
+	return a + b
+}
+func Sub(a, b int) int {
+	fmt.Println("in calc package - in sub function")
+	return a - b
+}
+
+a2.go 
+package calc
+
+import (
+	"fmt"
+)
+
+func Mult(a, b int) int {
+	fmt.Println("in calc package - in mult function")
+	return a * b
+}
+cmd\calclib>create a module(name as abc.com/calc), invoke tidy
+cmd\invokelib>create a module, go run . (check errors) 
+cmd\invokelib>go mod edit -replace abc.com/calc=../calclib (this line does not mean finding library, it will happen when tidy is invoked)
+cmd\invokelib>go mod tidy -> observe modified mod file 
+cmd\invokelib>go run . 
+
+
+
+
