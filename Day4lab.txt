@@ -1,3 +1,6 @@
+Lab3 - modify emp.go to include delete method (200 for successful deletion) and 404 if record not found.
+	   modify emp_test.go to include both test cases 
+
 Lab2 - http testing basic example 
 Create a folder Demo7\Lab1-httptest 
 Create emp.go 
